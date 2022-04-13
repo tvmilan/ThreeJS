@@ -38,11 +38,7 @@ export default function App() {
           <Iphone scale={1.0} color={"red"} />
         </Suspense>
       </Canvas> */}
-      <Canvas
-        onClick={() => {
-          setColor("blue");
-        }}
-      >
+      <Canvas camera={{ fov: 75, position: [0, 0, 20] }}>
         <OrbitControls enableZoom={false} />
         <ambientLight intensity={1.5} />
         <directionalLight position={[-2, 5, 2]} />
@@ -50,6 +46,17 @@ export default function App() {
           <Wallet color={color} />
         </Suspense>
       </Canvas>
+      <button
+        onClick={() => {
+          if (color === "blue") {
+            setColor("red");
+          } else {
+            setColor("blue");
+          }
+        }}
+      >
+        Change color
+      </button>
       {/* <Canvas camera={{ fov: 75, position: [0, 0, 5] }}>
         <OrbitControls enableZoom={false} />
         <ambientLight intensity={0.5} />
