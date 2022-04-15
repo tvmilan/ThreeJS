@@ -7,10 +7,13 @@ import { useGLTF } from "@react-three/drei";
 import { useLoader } from "react-three-fiber";
 import { TextureLoader } from "three";
 
-export default function Model({ color, ...props }) {
+export default function Model({ color, pattern, ...props }) {
   const group = useRef();
   const { nodes, materials } = useGLTF("/Wallet.gltf");
   const colorMap = useLoader(TextureLoader, "/map.jpg");
+  let newcolorMap;
+  console.log(pattern);
+
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -18,10 +21,15 @@ export default function Model({ color, ...props }) {
         material={nodes.WalletPlain.material}
         // position={[0.17, 0, -3.84]}
         position={[0, 0, 0]}
-        rotation={[3.4, 3.4, 3.4]}
+        rotation={[-1.0, 1.29, 0.6]}
       >
-        {/* <meshStandardMaterial map={colorMap} /> */}
-        <meshStandardMaterial color={color} map={colorMap} />
+        {pattern ? (
+          <meshStandardMaterial color={color} map={colorMap} />
+        ) : (
+          <meshStandardMaterial color={color} />
+        )}
+
+        {/* <meshStandardMaterial color={color} map={colorMap} /> */}
       </mesh>
       {/* <meshNormalMaterial attach="material" color={"red"} /> */}
     </group>
